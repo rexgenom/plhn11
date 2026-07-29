@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobsheet Pertemuan 2 - LOTO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jobsheet Pertemuan 3 - Implementasi 5R</title>
     <style>
         /* ==========================================================
            1. CSS VARIABLES & RESETS
@@ -31,45 +32,44 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #334155;
-            line-height: 1.6;
+            line-height: 1.5;
             background-color: #f1f5f9;
-            padding: 30px 15px;
+            padding: 15px 10px 80px 10px;
         }
 
         /* ==========================================================
            2. CONTAINER & LAYOUT
            ========================================================== */
         .wrapper {
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
             background-color: var(--white);
             border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 40px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .header-box {
             text-align: center;
             background-color: var(--light-blue);
             border-left: 5px solid var(--primary-blue);
-            padding: 20px;
-            margin-bottom: 35px;
-            border-radius: 0 6px 6px 0;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
         }
 
         .header-title {
             margin: 0;
-            font-size: 22px;
+            font-size: 18px;
             color: var(--primary-blue);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .header-subtitle {
-            margin: 8px 0 0 0;
-            font-size: 14px;
+            margin: 5px 0 0 0;
+            font-size: 13px;
             color: var(--text-muted);
             font-weight: bold;
         }
@@ -78,201 +78,141 @@
            3. TYPOGRAPHY & SECTIONS
            ========================================================== */
         .section-container {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            border-top: 2px dashed #e2e8f0;
+            padding-top: 20px;
+        }
+
+        .section-container:first-of-type {
+            border-top: none;
+            padding-top: 0;
         }
 
         .section-title {
-            margin: 0 0 20px 0;
-            font-size: 18px;
+            margin: 0 0 15px 0;
+            font-size: 16px;
             color: var(--primary-blue);
             text-transform: uppercase;
-            border-bottom: 2px solid var(--primary-blue);
-            padding-bottom: 10px;
             display: flex;
             align-items: center;
+            font-weight: 700;
         }
 
         .section-badge {
             background-color: var(--primary-blue);
             color: var(--white);
-            padding: 4px 12px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border-radius: 50%;
-            margin-right: 15px;
-            font-size: 16px;
-            font-weight: bold;
+            margin-right: 10px;
+            font-size: 14px;
+            flex-shrink: 0;
         }
 
         .instruction-text {
             margin: 0 0 15px 0;
-            text-align: justify;
-            font-size: 15px;
-        }
-
-        .alert-box {
-            background-color: #fef2f2;
-            border-left: 5px solid var(--danger-red);
-            padding: 15px;
-            border-radius: 0 4px 4px 0;
-            margin-bottom: 15px;
-        }
-
-        .alert-title {
-            margin: 0 0 10px 0;
-            color: #991b1b;
-            font-weight: bold;
-            font-size: 15px;
-        }
-
-        .alert-list {
-            margin: 0 0 0 20px;
-            padding: 0;
-            color: #991b1b;
             font-size: 14px;
+            color: #475569;
+            background: #fffbeb;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
         }
 
         .case-box {
             background-color: #fff7ed;
-            border-left: 5px solid var(--accent-orange);
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 0 4px 4px 0;
-        }
-
-        .case-title {
-            margin: 0 0 10px 0;
-            color: #c2410c;
-            font-size: 16px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .case-desc {
-            margin: 0;
-            font-size: 15px;
-            color: #431407;
-            font-style: italic;
-            text-align: justify;
-            line-height: 1.7;
+            border-left: 4px solid var(--accent-orange);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 6px 6px 0;
         }
 
         /* ==========================================================
-           4. TABLE STYLES (MOBILE-FIRST DESAIN BERTUMPUK)
+           4. MOBILE FRIENDLY FORMS & CARDS
            ========================================================== */
-        table { min-width: 100%; width: 100%; }
-        
-        table, thead, tbody, th, td, tr { 
-            display: block; 
-            width: 100%; 
+        .form-group {
+            margin-bottom: 15px;
         }
-        
-        thead { display: none; }
-        
-        tr { 
-            margin-bottom: 15px; 
-            border: 2px solid var(--border-color); 
-            border-radius: 8px; 
-            overflow: hidden; 
-        }
-        
-        td { 
-            border: none; 
-            border-bottom: 1px solid var(--border-color); 
-            padding: 15px; 
-            text-align: left !important; 
-            width: 100% !important; /* Mencegah style bawaan merusak tata letak */
-        }
-        td:last-child { border-bottom: none; }
-        
-        .td-bg-light { 
-            background-color: var(--bg-gray); 
-            font-weight: bold; 
-        }
-        
-        /* Munculkan judul kolom otomatis menggunakan data-label (Untuk Tugas 2 dst) */
-        td[data-label]::before {
-            content: attr(data-label);
+
+        .form-label {
             display: block;
-            font-weight: bold;
-            color: var(--accent-orange);
-            margin-bottom: 8px;
             font-size: 13px;
-            border-bottom: 1px dashed #cbd5e1;
-            padding-bottom: 5px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-dark);
         }
 
-        /* ==========================================================
-           TABEL 1: INFORMASI UMUM (HANYA IDENTITAS YANG DINAMIS)
-           ========================================================== */
-        /* Grid 2 kolom khusus untuk baris identitas, abaikan baris terakhir (Roleplay) */
-        #table-identitas tr:not(:last-child) {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            align-items: center;
-        }
-        
-        /* Penyesuaian khusus sel dalam tabel 1 */
-        #table-identitas td {
-            padding: 12px 15px;
-            box-sizing: border-box;
-        }
-        
-        /* Garis vertikal pemisah HANYA untuk sel di dalam baris grid */
-        #table-identitas tr:not(:last-child) td:nth-child(odd) {
-            border-right: 1px solid var(--border-color);
-        }
-        
-        /* Hilangkan garis bawah pada elemen terbawah di dalam grid */
-        #table-identitas tr:not(:last-child) td:nth-last-child(1),
-        #table-identitas tr:not(:last-child) td:nth-last-child(2) {
-            border-bottom: none;
-        }
-
-        /* ==========================================================
-           5. INTERACTIVE FORM ELEMENTS
-           ========================================================== */
         .form-control {
             width: 100%;
-            padding: 10px 12px;
-            font-size: 14px;
+            padding: 12px;
+            font-size: 16px;
             font-family: inherit;
             color: #0f172a;
-            background-color: var(--white);
-            border: 1px solid #94a3b8;
-            border-radius: 4px;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             transition: all 0.2s ease-in-out;
+            -webkit-appearance: none;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary-blue);
             box-shadow: 0 0 0 3px var(--focus-ring);
-            background-color: #fffbeb;
-        }
-
-        .form-control-inline {
-            display: inline-block;
-            width: calc(100% - 35px);
-            margin-bottom: 8px;
+            background-color: var(--white);
         }
 
         textarea.form-control {
             resize: vertical;
-            min-height: 90px;
+            min-height: 100px;
+        }
+
+        .card-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
         }
 
         .checkbox-label {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             cursor: pointer;
             font-size: 14px;
-            margin-bottom: 8px;
-            transition: color 0.2s;
+            background: var(--white);
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: background 0.2s;
         }
-        
+
         .checkbox-label input {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
+            margin-right: 12px;
+            margin-top: 2px;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            accent-color: var(--primary-blue);
         }
 
         .input-error {
@@ -280,37 +220,65 @@
             background-color: #fef2f2 !important;
         }
 
+        .text-error {
+            color: var(--danger-red) !important;
+        }
+
         /* ==========================================================
-           6. CUSTOM MODAL ALERT
+           5. FIXED BOTTOM BAR (MOBILE)
+           ========================================================== */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 15px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-print {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--success-green);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* ==========================================================
+           6. MODAL ALERTS
            ========================================================== */
         .modal-overlay {
-            display: none; 
-            position: fixed; 
-            z-index: 9999; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            height: 100%; 
-            background-color: rgba(0,0,0,0.5); 
-            align-items: center; 
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .modal-content {
             background-color: #fef2f2;
             border-top: 5px solid var(--danger-red);
-            border-radius: 8px;
-            padding: 25px;
-            width: 90%;
+            border-radius: 12px;
+            padding: 25px 20px;
+            width: 100%;
             max-width: 400px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            animation: modalFadeIn 0.3s;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .modal-title {
@@ -330,246 +298,153 @@
             background-color: var(--danger-red);
             color: white;
             border: none;
-            padding: 10px 25px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .modal-btn:hover {
-            background-color: #b91c1c;
-        }
-
-        /* ==========================================================
-           7. PRINT BUTTON & MEDIA QUERY
-           ========================================================== */
-        .print-toolbar {
-            text-align: center;
-            margin-bottom: 25px;
-            padding: 20px;
-            background-color: var(--text-dark);
+            padding: 12px 25px;
             border-radius: 8px;
-            position: sticky;
-            top: 20px;
-            z-index: 100;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .btn-print {
-            background-color: var(--success-green);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 16px;
             font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-
-        .btn-print:hover {
-            background-color: #059669;
-        }
-
-        .toolbar-text {
-            color: #cbd5e1;
-            font-size: 14px;
+            width: 100%;
+            font-size: 16px;
         }
 
         /* ==========================================================
-           8. SIMULATOR LOTO
+           7. SIMULASI MINI 5R
            ========================================================== */
         .sim-container {
-            background: #1e293b;
-            border-radius: 12px;
-            padding: 20px;
-            color: white;
-            margin-bottom: 25px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            border: 2px solid #334155;
-        }
-        .sim-header {
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 1px solid #334155;
-            padding-bottom: 10px;
-        }
-        .sim-panel {
-            background: #cbd5e1;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
-            padding: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 220px;
-            border: 4px solid #94a3b8;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
         }
-        .mcb-box {
-            width: 90px;
-            height: 140px;
-            background: #f8fafc;
-            border: 2px solid #475569;
-            border-radius: 6px;
-            position: relative;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .mcb-switch {
-            width: 45px;
-            height: 65px;
-            background: #ef4444; 
-            border-radius: 4px;
-            cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
-            box-shadow: 0 4px 0 #b91c1c;
-            transform: translateY(-12px);
-        }
-        .mcb-switch.off {
-            background: #22c55e; 
-            box-shadow: 0 -4px 0 #15803d;
-            transform: translateY(12px);
-        }
-        .mcb-label, .mcb-label-bottom {
-            font-size: 11px;
-            font-weight: bold;
-            color: #1e293b;
-            position: absolute;
-        }
-        .mcb-label { top: 8px; }
-        .mcb-label-bottom { bottom: 8px; }
 
-        .sim-tools {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .tool-btn {
-            background: #334155;
-            border: 1px solid #475569;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 6px;
-            cursor: pointer;
+        .sim-header {
+            text-align: center;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
             font-size: 14px;
         }
-        .tool-btn:hover { background: #475569; transform: translateY(-2px); }
-        .tool-btn:active { transform: translateY(0); }
-        
-        .lockout-overlay {
+
+        .sim-area {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .sim-zone {
+            flex: 1;
+            background: white;
+            border: 2px dashed #94a3b8;
+            border-radius: 8px;
+            min-height: 110px;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sim-zone-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #64748b;
+            margin-bottom: 8px;
+            width: 100%;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        .sim-item {
+            background: var(--primary-blue);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            user-select: none;
+            font-weight: bold;
+        }
+
+        .sim-item.trash-item {
+            background: #64748b;
+        }
+
+        .sim-feedback {
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            min-height: 20px;
+            color: var(--danger-red);
+        }
+
+        .sim-success {
+            color: var(--success-green) !important;
+        }
+
+        .action-popup {
+            display: none;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70px;
-            height: 70px;
-            background: rgba(234, 179, 8, 0.95);
-            border: 2px solid #a16207;
-            border-radius: 6px;
-            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             z-index: 10;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
-        }
-        .tag-overlay {
-            position: absolute;
-            top: 60%;
-            left: 70%;
-            width: 60px;
-            height: 85px;
-            background: #fff;
-            border: 2px solid #dc2626;
-            color: #dc2626;
-            font-size: 10px;
-            font-weight: bold;
             text-align: center;
-            padding: 5px;
-            display: none;
-            z-index: 11;
-            transform: rotate(15deg);
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-            line-height: 1.2;
+            width: 90%;
+            max-width: 300px;
         }
 
-        .indicator-light {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background: #ef4444;
-            box-shadow: 0 0 15px #ef4444;
-            border: 2px solid #7f1d1d;
-            transition: all 0.3s;
-        }
-        .indicator-light.off {
-            background: #1e293b;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-            border-color: #0f172a;
-        }
-
-        .multimeter-display {
-            background: #0f172a;
-            color: #22c55e;
-            font-family: 'Courier New', Courier, monospace;
-            padding: 15px;
+        .btn-sim {
+            padding: 10px 15px;
+            border: none;
             border-radius: 6px;
-            text-align: center;
-            font-size: 24px;
+            margin: 5px;
             font-weight: bold;
-            display: none;
-            border: 2px solid #334155;
-            letter-spacing: 2px;
-        }
-
-        .sim-feedback {
-            background: #334155;
-            padding: 12px 15px;
-            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            width: 100%;
             font-size: 14px;
-            border-left: 4px solid #3b82f6;
-            min-height: 45px;
-            display: flex;
-            align-items: center;
         }
 
-        /* ==========================================================
-           9. RESPONSIVE MOBILE LAYOUT
-           (Telah digabungkan ke style utama untuk Mobile-First Design)
-           ========================================================== */
+        .btn-sim-box {
+            background: var(--primary-blue);
+        }
 
-    <style>
+        .btn-sim-trash {
+            background: var(--danger-red);
+        }
+
+        .btn-sim-cancel {
+            background: #94a3b8;
+        }
 
         @media print {
-            body { background-color: var(--white); padding: 0; }
-            .wrapper { border: none; box-shadow: none; padding: 0; max-width: 100%; }
-            .no-print { display: none !important; }
-            .table-responsive { overflow-x: visible; margin-bottom: 20px; }
-            table { min-width: 100%; }
+            body {
+                background-color: var(--white);
+                padding: 0;
+            }
+
+            .wrapper {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .section-container {
+                page-break-inside: avoid;
+            }
+
             .form-control {
                 border: 1px solid transparent;
                 border-bottom: 1px dashed #94a3b8;
@@ -577,436 +452,499 @@
                 padding: 4px 0;
                 resize: none;
             }
-            textarea { overflow: hidden; }
+
+            .card-item {
+                border: none;
+                padding: 0;
+                margin-bottom: 10px;
+            }
+
+            textarea {
+                overflow: hidden;
+            }
         }
     </style>
-    <!-- Tambahkan library html2pdf.js untuk export langsung ke PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
+
 <body>
 
+    <!-- MODAL ALERT KOSONG -->
     <div id="alertModal" class="modal-overlay no-print">
         <div class="modal-content">
             <h3 class="modal-title">⚠️ PERINGATAN!</h3>
-            <p class="modal-text">Masih ada kolom jawaban, identitas, atau checklist yang belum terisi.<br><br>Silakan lengkapi area yang ditandai dengan warna merah muda sebelum menyimpan PDF.</p>
+            <p class="modal-text">Masih ada bagian (jawaban, identitas, atau checklist) yang belum kamu
+                isi.<br><br>Silakan lengkapi area yang ditandai warna merah muda.</p>
             <button class="modal-btn" onclick="closeModal()">SAYA MENGERTI</button>
         </div>
     </div>
 
-    <div class="print-toolbar no-print">
-        <span class="toolbar-text">
-            Pastikan seluruh hasil simulasi dan roleplay telah didokumentasikan sebelum menyimpan.
-        </span>
+    <div class="wrapper">
+
+        <!-- HEADER -->
+        <div class="header-box">
+            <h3 class="header-title">
+                Lembar Kerja Praktikum 3
+            </h3>
+            <p class="header-subtitle">
+                Implementasi Budaya Kerja 5R (5S)
+            </p>
+        </div>
+
+        <!-- IDENTITAS -->
+        <div class="section-container">
+            <div class="form-group">
+                <label class="form-label">Mata Pelajaran</label>
+                <input type="text" class="form-control" value="PLHN-11" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Kelas / Kelompok</label>
+                <input type="text" class="form-control" placeholder="Cth: XI TITL 1 / Kelompok 2" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Tanggal Praktik</label>
+                <input type="date" class="form-control" id="tanggalPraktik" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Daftar Anggota Kelompok</label>
+                <textarea class="form-control"
+                    placeholder="1. Nama Anggota 1&#10;2. Nama Anggota 2&#10;3. Nama Anggota 3..." required></textarea>
+            </div>
+        </div>
+
+        <!-- SIMULASI MINI (NEW) -->
+        <div class="section-container no-print">
+            <h4 class="section-title">
+                <span class="section-badge" style="background: var(--accent-orange)">🎮</span>
+                Simulasi Mini: Praktik 5R
+            </h4>
+            <p class="instruction-text">
+                Sebelum memulai tugas nyata, mari berlatih! Ketuk <em>(tap)</em> barang yang berserakan di <strong>Meja
+                    Berantakan</strong>, lalu pilih apakah barang tersebut harus disimpan ke <strong>Tool Box</strong>
+                atau dibuang ke <strong>Tempat Sampah</strong>.
+            </p>
+
+            <div class="sim-container" id="simContainer">
+                <div class="sim-header">Ketuk Barang di Bawah Ini:</div>
+
+                <div class="sim-zone" id="zone-meja"
+                    style="margin-bottom: 15px; border-color: var(--accent-orange); flex-direction: row; flex-wrap: wrap; justify-content: center;">
+                    <div class="sim-zone-title">⚠️ Meja Berantakan</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Tang Kombinasi</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Kabel Putus 10cm
+                    </div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Obeng Plus</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🔩 Baut Karatan</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">📏 Tespen</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Tang Potong</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Potongan Isolasi
+                    </div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Obeng Minus</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Kawat Bekas</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Tang Lancip</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Plastik Bungkus
+                    </div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔨 Palu Besi</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Lampu Mati</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Obeng Besar</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🔩 Paku Bengkok</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Obeng Kecil</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Pipa Pecah</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Kunci Pas 10</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Amplas Bekas</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Kunci Pas 12</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Steker Pecah</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">📏 Multitester</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Tespen Digital</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔪 Cutter</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪚 Gergaji Mini</div>
+                </div>
+
+                <div class="sim-area">
+                    <div class="sim-zone" id="zone-box">
+                        <div class="sim-zone-title">🧰 Tool Box</div>
+                    </div>
+                    <div class="sim-zone" id="zone-trash">
+                        <div class="sim-zone-title">🗑️ Tempat Sampah</div>
+                    </div>
+                </div>
+
+                <div class="sim-feedback" id="simFeedback"></div>
+
+                <!-- Popup Pilihan -->
+                <div class="action-popup" id="actionPopup">
+                    <p style="margin-bottom: 15px; font-size: 14px; font-weight: bold; color: var(--text-dark);"
+                        id="popupItemName"></p>
+                    <button class="btn-sim btn-sim-box" onclick="moveItem('box')">🧰 Simpan ke Tool Box</button>
+                    <button class="btn-sim btn-sim-trash" onclick="moveItem('trash')">🗑️ Buang ke Sampah</button>
+                    <button class="btn-sim btn-sim-cancel" style="margin-top: 10px;"
+                        onclick="closePopup()">Batal</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUGAS 1 -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">1</span>
+                Tugas I: Eksplorasi Awal
+            </h4>
+            <p class="instruction-text">
+                Amatilah kondisi <strong>Tool Box kelompok</strong> dan <strong>Tool Belt/peralatan pribadi</strong>
+                anggota kelompok kalian saat ini <strong>(SEBELUM penataan)</strong>. Catatlah benda/alat apa saja yang
+                berserakan, tercampur, atau salah tempat, dan estimasi waktu yang akan terbuang untuk mencarinya.
+            </p>
+
+            <div class="card-item">
+                <div class="card-title">Temuan 1</div>
+                <div class="form-group">
+                    <label class="form-label">Benda/Alat Berserakan:</label>
+                    <textarea class="form-control"
+                        placeholder="Cth: Berbagai obeng tercampur di satu kantong tas..." style="min-height: 70px;" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Estimasi Waktu Terbuang (Mencari):</label>
+                    <input type="text" class="form-control" placeholder="Cth: 2 Menit" required>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title">Temuan 2</div>
+                <div class="form-group">
+                    <label class="form-label">Benda/Alat Berserakan:</label>
+                    <textarea class="form-control" placeholder="Isi temuan observasi..." style="min-height: 70px;" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Estimasi Waktu Terbuang (Mencari):</label>
+                    <input type="text" class="form-control" placeholder="Estimasi waktu..." required>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 15px;">
+                <label class="form-label">Kesimpulan Eksplorasi:</label>
+                <textarea class="form-control"
+                    placeholder="Uraikan bagaimana kondisi ini dapat menghambat kerja saat praktik instalasi..."
+                    required></textarea>
+            </div>
+        </div>
+
+        <!-- TUGAS 2 -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">2</span>
+                Tugas II: Eksekusi 5R
+            </h4>
+            <p class="instruction-text">
+                Laksanakan penataan alat (Tool Box & Tool Belt/Tas Alat pribadi). <strong>Centang</strong> checklist di
+                bawah ini setelah kelompok kalian benar-benar mengeksekusinya, lalu isi detailnya.
+            </p>
+
+            <!-- RINGKAS -->
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">1. RINGKAS (Menyortir)</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Menyortir paku/kabel/sampah tidak terpakai dari dalam Tool Box
+                        atau Tas Alat.
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Memisahkan alat yang rusak/berkarat dari alat yang masih
+                        berfungsi baik.
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Catatan Tindakan Kelompok:</label>
+                    <textarea class="form-control"
+                        placeholder="Sebutkan benda apa saja yang berhasil kalian singkirkan/buang..."
+                        required></textarea>
+                </div>
+            </div>
+
+            <!-- RAPI -->
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">2. RAPI (Menata Letak)</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Menata macam-macam obeng dan tang ke dalam Tool Box sesuai
+                        kompartemen/sekatnya.
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Memasukkan alat-alat pribadi secara teratur ke dalam kantong
+                        Tool Belt masing-masing siswa.
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Catatan Tindakan Kelompok:</label>
+                    <textarea class="form-control"
+                        placeholder="Jelaskan sistem penataan yang kalian buat (misal: pengelompokan jenis tang di kantong kiri)..."
+                        required></textarea>
+                </div>
+            </div>
+
+            <!-- RESIK -->
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">3. RESIK (Pembersihan)</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Mengelap Tool Box dan peralatan dari kotoran/minyak.
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Membersihkan dan menyapu area lantai ruang kelas tempat
+                        kelompok praktik.
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Catatan Tindakan Kelompok:</label>
+                    <textarea class="form-control"
+                        placeholder="Sebutkan alat kebersihan yang digunakan dan area mana yang dibersihkan..."
+                        required></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUGAS 3 -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">3</span>
+                Tugas III: Jadwal Piket 5R
+            </h4>
+            <p class="instruction-text">
+                Untuk mempertahankan kondisi peralatan yang sudah <strong>Ringkas, Rapi, dan Resik</strong>, susunlah
+                jadwal penanggung jawab perawatan 5R (Tool Box & Kebersihan) kelompok kalian. Kalian dapat mengisi
+                <strong>lebih dari 1 nama siswa</strong> per harinya.
+            </p>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Senin</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="1. Nama Siswa A&#10;2. Nama Siswa B..."
+                        style="min-height: 70px;" required></textarea>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Selasa</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="1. Nama Siswa C&#10;2. Nama Siswa D..."
+                        style="min-height: 70px;" required></textarea>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Rabu</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="Tulis nama petugas piket..." style="min-height: 70px;"
+                        required></textarea>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Kamis</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="Tulis nama petugas piket..." style="min-height: 70px;"
+                        required></textarea>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Jumat</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="Tulis nama petugas piket..." style="min-height: 70px;"
+                        required></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUGAS 4: STUDI KASUS -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">4</span>
+                Tugas IV: Analisis Studi Kasus
+            </h4>
+            <p class="instruction-text">
+                Bacalah masalah di bawah ini, lalu berikan solusi perbaikan berdasarkan prinsip 5R yang telah kalian
+                pelajari.
+            </p>
+
+            <div class="case-box" style="border-left-color: var(--danger-red); background-color: #fef2f2;">
+                <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #991b1b;">
+                    📖 Kasus Praktik Kelistrikan:
+                </p>
+                <p style="font-size: 14px; color: #450a0a; margin-bottom: 0; text-align: justify;">
+                    Saat sedang praktik instalasi, Budi kesulitan mencari obeng plus dan tang potong karena tercampur
+                    dengan potongan kabel tajam, baut karatan, dan sampah isolasi di dasar tas alatnya (Tool Belt).
+                    Akibatnya, Budi menghabiskan waktu 10 menit hanya untuk mengaduk-aduk tasnya. Bahkan, jari Budi
+                    sempat terluka tergores ujung kabel tajam yang seharusnya sudah dibuang. Pekerjaan kelompok mereka
+                    pun menjadi kacau dan terlambat.
+                </p>
+            </div>
+
+            <div class="card-item">
+                <div class="form-group">
+                    <label class="form-label">Menurut kelompokmu, prinsip 5R apa saja yang dilanggar oleh Budi?</label>
+                    <input type="text" class="form-control" placeholder="Cth: Ringkas (karena...) dan Rapi (karena...)"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Solusi Perbaikan: Langkah apa yang harus dilakukan Budi besok?</label>
+                    <textarea class="form-control"
+                        placeholder="Uraikan solusi perbaikan penataan alat di dalam tas untuk Budi..."
+                        required></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUGAS 5 -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">5</span>
+                Tugas V: Kunjungan & Refleksi
+            </h4>
+            <p class="instruction-text">
+                Lakukan kunjungan (tour) ke area meja/kelompok lain di kelas. Apresiasi hasil kerja penataan mereka,
+                lalu jawab pertanyaan berikut.
+            </p>
+
+            <div class="case-box">
+                <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: var(--text-dark);">
+                    1. Dari kelompok lain yang kalian kunjungi, inovasi penataan alat (di Tool Box / Tool Belt) apa yang
+                    paling menarik dan rapi?
+                </p>
+                <textarea class="form-control"
+                    placeholder="Tuliskan nama kelompok yang dikunjungi dan apresiasi kalian..." required></textarea>
+            </div>
+
+            <div class="case-box">
+                <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: var(--text-dark);">
+                    2. Evaluasi Diri: Bagaimana perasaan kalian saat bekerja dengan peralatan yang sudah tertata rapi
+                    berstandar 5R, dibandingkan saat masih berantakan?
+                </p>
+                <textarea class="form-control"
+                    placeholder="Tuliskan refleksi jujur mengenai rasa nyaman dan efisiensi waktu mencari alat..."
+                    required></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM BAR UNTUK MOBILE -->
+    <div class="bottom-bar no-print">
         <button type="button" class="btn-print" onclick="validateAndPrint()">
             Simpan PDF / Cetak Laporan
         </button>
     </div>
 
-    <div class="wrapper">
-        
-        <div class="header-box">
-            <h3 class="header-title">
-                Lembar Kerja Praktikum - Pertemuan 2
-            </h3>
-            <p class="header-subtitle">
-                Prosedur Isolasi Energi (Lockout/Tagout) | Kode: JS-TITL-K3LH-LOTO
-            </p>
-        </div>
-
-        <div class="table-responsive">
-            <table id="table-identitas">
-                <tbody>
-                    <tr>
-                        <td class="td-bg-light" style="width: 20%;">Mata Pelajaran</td>
-                        <td style="width: 30%;">Dasar-Dasar Kejuruan (K3LH)</td>
-                        <td class="td-bg-light" style="width: 20%;">Nama Kelompok</td>
-                        <td style="width: 30%;">
-                            <input type="text" class="form-control" placeholder="Contoh: Kelompok 1" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-bg-light">Materi Pokok</td>
-                        <td>Implementasi LOTO & Verifikasi Zero Energy</td>
-                        <td class="td-bg-light">Kelas / Semester</td>
-                        <td>
-                            <input type="text" class="form-control" placeholder="Contoh: X TITL 1" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-bg-light">Guru Pengampu</td>
-                        <td>Muhamad Rendi Muhindo, S.Pd.</td>
-                        <td class="td-bg-light">Tanggal Praktik</td>
-                        <td>
-                            <input type="date" class="form-control" id="tanggalPraktik" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-bg-light" style="vertical-align: top;">
-                            Peran Roleplay (Pasangan)
-                        </td>
-                        <td colspan="3">
-                            <div style="margin-bottom: 10px;">
-                                <span style="display:inline-block; width: 150px; font-weight:bold;">murid 1 (Teknisi):</span>
-                                <input type="text" class="form-control form-control-inline" placeholder="Nama Lengkap murid 1" required>
-                            </div>
-                            <div style="margin-bottom: 5px;">
-                                <span style="display:inline-block; width: 150px; font-weight:bold;">murid 2 (Safety Officer):</span>
-                                <input type="text" class="form-control form-control-inline" placeholder="Nama Lengkap murid 2" required>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="section-container">
-            <h4 class="section-title">
-                <span class="section-badge">1</span> 
-                Tugas I: Pendahuluan & Analisis Kasus (Apersepsi)
-            </h4>
-            <div class="case-box">
-                <h5 class="case-title">Studi Kasus Multi-Lantai</h5>
-                <p class="case-desc">
-                    "Jika kalian memperbaiki jalur kabel yang sama dengan teman yang berada di beda lantai, bagaimana agar teman kalian tidak tidak sengaja menyalakan MCB utama yang telah kalian matikan sebelumnya?"
-                </p>
-            </div>
-            <div style="margin-top: 15px;">
-                <label style="font-weight: bold; display: block; margin-bottom: 8px;">Tuliskan Solusi Analisis Kelompok Kalian:</label>
-                <textarea class="form-control" style="min-height: 100px;" placeholder="Tuliskan analisis dan langkah pencegahan berdasarkan konsep Lockout Tagout..." required></textarea>
-            </div>
-        </div>
-
-        <div class="section-container">
-            <h4 class="section-title">
-                <span class="section-badge">2</span> 
-                Tugas II: Eksplorasi (Mindful) Perangkat LOTO & Residual Energy
-            </h4>
-            <p class="instruction-text">
-                Berdasarkan demonstrasi Guru di bengkel, identifikasi fungsi perangkat pengunci yang tersedia di meja kalian dan temukan kemungkinan bahaya energi sisa (residual energy) pada panel distribusi.
-            </p>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 25%;">Komponen LOTO</th>
-                            <th style="width: 40%;">Fungsi / Penggunaan Fisik di Bengkel</th>
-                            <th style="width: 35%;">Dokumentasi Kondisi Komponen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="td-bg-light td-center" style="vertical-align: middle;">Padlock & Hasp</td>
-                            <td data-label="Fungsi / Penggunaan Fisik di Bengkel"><textarea class="form-control" placeholder="Jelaskan cara pemasangannya pada panel..." required></textarea></td>
-                            <td data-label="Dokumentasi Kondisi Komponen"><textarea class="form-control" placeholder="Tuliskan warna gembok, jumlah lubang hasp..." required></textarea></td>
-                        </tr>
-                        <tr>
-                            <td class="td-bg-light td-center" style="vertical-align: middle;">Tagout (Label)</td>
-                            <td data-label="Fungsi / Penggunaan Fisik di Bengkel"><textarea class="form-control" placeholder="Jelaskan mengapa Tagout saja tidak cukup..." required></textarea></td>
-                            <td data-label="Dokumentasi Kondisi Komponen"><textarea class="form-control" placeholder="Data apa saja yang wajib ditulis di tag..." required></textarea></td>
-                        </tr>
-                        <tr>
-                            <td class="td-bg-light td-center" style="vertical-align: middle; color:#b45309;">Analisis Residual Energy</td>
-                            <td colspan="2" data-label="Tindakan / Solusi Penetralan"><textarea class="form-control" placeholder="Identifikasi sumber energi sisa (misal: kapasitor/baterai) pada panel praktik dan bagaimana cara menetralkannya..." style="min-height: 80px;" required></textarea></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="section-container" style="page-break-before: always; padding-top: 20px;">
-            <h4 class="section-title">
-                <span class="section-badge">3</span> 
-                Tugas III: Diskusi & Elaborasi (Meaningful) - Roleplay / Simulasi
-            </h4>
-            <div class="alert-box">
-                <p class="alert-title">Skenario Roleplay (Bekerja Berpasangan):</p>
-                <ul class="alert-list">
-                    <li><strong>murid 1 (Teknisi):</strong> Bertugas mengaplikasikan LOTO di panel utama (Locking & Tagging).</li>
-                    <li><strong>murid 2 (Safety Officer):</strong> Bertugas menguji dan memastikan sirkuit sudah benar-benar mati (zero energy state) menggunakan <em>test pen</em> atau <em>multimeter</em>.</li>
-                </ul>
-            </div>
-            
-            <!-- SIMULATOR LOTO -->
-            <div class="sim-container no-print">
-                <div class="sim-header">
-                    <h5 style="margin: 0; color: #38bdf8; font-size: 16px;">🎮 Simulator Interaktif LOTO (Selesaikan Sebelum Mengisi Checklist)</h5>
-                    <button type="button" class="tool-btn" style="padding: 5px 10px; font-size: 12px; background: #dc2626;" onclick="resetSimulator()">🔄 Reset</button>
-                </div>
-                
-                <div class="sim-panel">
-                    <div class="indicator-light" id="sim-lamp"></div>
-                    <div class="mcb-box">
-                        <div class="mcb-label">ON</div>
-                        <div class="mcb-switch" id="sim-mcb" onclick="toggleMCB()"></div>
-                        <div class="mcb-label-bottom">OFF</div>
-                        
-                        <!-- Lockout Overlays -->
-                        <div class="lockout-overlay" id="sim-lock">🔒</div>
-                        <div class="tag-overlay" id="sim-tag">DANGER<br>DO NOT<br>OPERATE</div>
-                    </div>
-                </div>
-
-                <div class="multimeter-display" id="sim-multimeter-screen">
-                    000 V
-                </div>
-                
-                <div class="sim-feedback" id="sim-feedback">
-                    ℹ️ Info: Sistem dalam keadaan aktif (bertegangan). Klik tuas MCB untuk mematikan.
-                </div>
-
-                <div class="sim-tools">
-                    <button type="button" class="tool-btn" onclick="applyLock()">🔒 Pasang Lock & Hasp</button>
-                    <button type="button" class="tool-btn" onclick="applyTag()">🏷️ Pasang Tagout</button>
-                    <button type="button" class="tool-btn" onclick="useMultimeter()">⚡ Gunakan Multimeter</button>
-                </div>
-            </div>
-            
-            <p style="font-weight:bold; margin-bottom: 10px;">Checklist Observasi Simulasi (Otomatis tercentang dari simulator):</p>
-            
-            <div style="border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; background-color: #ffffff;">
-                <label class="checkbox-label">
-                    <input type="checkbox" id="chk-step1" required> Teknisi mematikan beban dan meng-OFF-kan MCB utama.
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" id="chk-step2" required> Teknisi memasang Circuit Breaker Lockout, Hasp, dan Padlock secara presisi.
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" id="chk-step3" required> Teknisi mengisi data pada Tagout dan menggantungkannya pada gembok.
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" id="chk-step4" required> Safety Officer mencoba menekan tombol ON panel untuk memastikan penguncian mekanis berhasil (Konsep logis Tagging tanpa Locking = gagal).
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" id="chk-step5" required> Safety Officer menggunakan Multimeter / Test Pen pada busbar keluaran.
-                </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" id="chk-step6" required> Safety Officer mengonfirmasi pembacaan 0 Volt (Zero Energy State tercapai).
-                </label>
-            </div>
-            
-            <div style="margin-top: 20px;">
-                <label style="font-weight: bold; display: block; margin-bottom: 8px;">Temuan saat Simulasi:</label>
-                <textarea class="form-control" style="min-height: 100px;" placeholder="Tuliskan kendala saat memasang perangkat LOTO atau saat Safety Officer melakukan pengukuran Zero Energy State..." required></textarea>
-            </div>
-        </div>
-
-        <div class="section-container">
-            <h4 class="section-title">
-                <span class="section-badge">4</span> 
-                Tugas IV: Refleksi (Joyful) & Kesimpulan
-            </h4>
-            <p class="instruction-text">
-                Berdasarkan pengalaman roleplay yang baru saja kalian lakukan, jawablah pertanyaan refleksi berikut:
-            </p>
-            
-            <div style="margin-bottom: 25px;">
-                <p style="margin: 0 0 10px 0; font-size: 15px; font-weight: bold; color: var(--text-dark);">
-                    1. "Bagian mana dari prosedur LOTO yang menurut kalian paling rawan terlewat atau paling sering diremehkan oleh pekerja di lapangan?"
-                </p>
-                <textarea class="form-control" style="min-height: 100px;" placeholder="Ceritakan pengalaman dan analisis logis kalian di sini..." required></textarea>
-            </div>
-            
-            <div style="margin-bottom: 10px;">
-                <p style="margin: 0 0 10px 0; font-size: 15px; font-weight: bold; color: var(--text-dark);">
-                    2. "Berdasarkan keseluruhan materi dan praktik, simpulkan urutan standar baku prosedur LOTO secara ringkas!"
-                </p>
-                <textarea class="form-control" style="min-height: 120px;" placeholder="1. Persiapan, 2. Shutdown, 3. Isolasi, 4. Lock & Tag, 5. ... 6. ..." required></textarea>
-            </div>
-        </div>
-
-    </div>
-
     <script>
-        // Deklarasi global untuk elemen yang butuh scroll
+        // ==========================================
+        // 1. LOGIKA SIMULASI MINI 5R
+        // ==========================================
+        let selectedElement = null;
+        let itemsLeft = 25;
+
+        function selectItem(el) {
+            selectedElement = el;
+            document.getElementById('popupItemName').innerText = "Pindahkan " + el.innerText + " ke mana?";
+            document.getElementById('actionPopup').style.display = 'block';
+            document.getElementById('simFeedback').innerText = '';
+        }
+
+        function closePopup() {
+            document.getElementById('actionPopup').style.display = 'none';
+            selectedElement = null;
+        }
+
+        function moveItem(destination) {
+            if (!selectedElement) return;
+
+            const type = selectedElement.getAttribute('data-type');
+            const feedbackEl = document.getElementById('simFeedback');
+
+            if (destination === 'box') {
+                if (type === 'good') {
+                    document.getElementById('zone-box').appendChild(selectedElement);
+                    selectedElement.onclick = null; // matikan klik
+                    selectedElement.style.cursor = 'default';
+                    feedbackEl.innerText = "Benar! Alat disimpan dengan Rapi.";
+                    feedbackEl.className = "sim-feedback sim-success";
+                    itemsLeft--;
+                } else {
+                    feedbackEl.innerText = "Salah! Barang rusak/sampah harus dibuang (Ringkas).";
+                    feedbackEl.className = "sim-feedback";
+                }
+            } else if (destination === 'trash') {
+                if (type === 'bad') {
+                    document.getElementById('zone-trash').appendChild(selectedElement);
+                    selectedElement.onclick = null;
+                    selectedElement.style.cursor = 'default';
+                    feedbackEl.innerText = "Benar! Barang tak terpakai dibuang (Ringkas).";
+                    feedbackEl.className = "sim-feedback sim-success";
+                    itemsLeft--;
+                } else {
+                    feedbackEl.innerText = "Salah! Alat masih bagus jangan dibuang.";
+                    feedbackEl.className = "sim-feedback";
+                }
+            }
+
+            closePopup();
+
+            if (itemsLeft === 0) {
+                feedbackEl.innerText = "🎉 Luar Biasa! Simulasi Selesai, area kerjamu sudah Rapi!";
+                feedbackEl.className = "sim-feedback sim-success";
+                document.getElementById('zone-meja').style.display = 'none';
+            }
+        }
+
+        // ==========================================
+        // 2. LOGIKA FORM DAN VALIDASI
+        // ==========================================
         let elementToFocus = null;
 
         document.addEventListener('DOMContentLoaded', (event) => {
-            // Auto-expand textarea & hapus error saat diketik
             const textareas = document.querySelectorAll('textarea');
             textareas.forEach(el => {
-                el.addEventListener('input', function() {
+                el.addEventListener('input', function () {
                     this.style.height = 'auto';
                     this.style.height = (this.scrollHeight) + 'px';
-                    this.classList.remove('input-error'); 
+                    this.classList.remove('input-error');
                 });
             });
 
-            // Hapus error saat input diisi
             const inputs = document.querySelectorAll('input');
             inputs.forEach(el => {
-                el.addEventListener('input', function() {
+                el.addEventListener('input', function () {
                     this.classList.remove('input-error');
-                    if(this.type === 'checkbox'){
+                    if (this.type === 'checkbox') {
                         const parentLabel = this.closest('label');
-                        if(parentLabel) parentLabel.style.color = '#334155';
+                        if (parentLabel) parentLabel.classList.remove('text-error');
                     }
                 });
             });
         });
 
-        // --- LOGIKA SIMULATOR LOTO ---
-        let simState = {
-            mcbOn: true,
-            hasLock: false,
-            hasTag: false,
-            mechanicalTested: false,
-            meterTested: false
-        };
-
-        function updateSimUI(msg = null) {
-            const mcb = document.getElementById('sim-mcb');
-            const lamp = document.getElementById('sim-lamp');
-            const lock = document.getElementById('sim-lock');
-            const tag = document.getElementById('sim-tag');
-            const feedback = document.getElementById('sim-feedback');
-            
-            if (simState.mcbOn) {
-                mcb.classList.remove('off');
-                lamp.classList.remove('off');
-            } else {
-                mcb.classList.add('off');
-                lamp.classList.add('off');
-            }
-            
-            lock.style.display = simState.hasLock ? 'flex' : 'none';
-            tag.style.display = simState.hasTag ? 'block' : 'none';
-            
-            if (msg) feedback.innerHTML = msg;
-            
-            // Auto-update checkboxes
-            if (!simState.mcbOn) checkStep('chk-step1');
-            if (simState.hasLock) checkStep('chk-step2');
-            if (simState.hasTag) checkStep('chk-step3');
-            if (simState.mechanicalTested) checkStep('chk-step4');
-            if (simState.meterTested) checkStep('chk-step5');
-            if (simState.meterTested && !simState.mcbOn) checkStep('chk-step6');
-        }
-
-        function checkStep(id) {
-            const cb = document.getElementById(id);
-            if (cb) {
-                cb.checked = true;
-                const parent = cb.closest('label');
-                if (parent) parent.style.color = '#334155'; // Hilangkan efek error
-            }
-        }
-
-        function toggleMCB() {
-            if (simState.hasLock) {
-                simState.mechanicalTested = true;
-                updateSimUI('⚠️ <b>Uji Coba Mekanis Gagal:</b> Tuas terkunci dengan aman. Penguncian berhasil! (Syarat 4 Terpenuhi)');
-                return;
-            }
-            
-            simState.mcbOn = !simState.mcbOn;
-            if (simState.mcbOn) {
-                updateSimUI('⚠️ <b>Peringatan:</b> Sistem kembali menyala dan bertegangan!');
-            } else {
-                updateSimUI('✅ MCB dimatikan. Sistem aman untuk dipasang perangkat LOTO.');
-            }
-        }
-
-        function applyLock() {
-            if (simState.mcbOn) {
-                updateSimUI('❌ <b>Gagal:</b> Matikan MCB terlebih dahulu sebelum memasang gembok/pengunci!');
-                return;
-            }
-            if (simState.hasLock) {
-                updateSimUI('ℹ️ Lock sudah terpasang.');
-                return;
-            }
-            simState.hasLock = true;
-            updateSimUI('✅ Lock & Hasp berhasil dipasang.');
-        }
-
-        function applyTag() {
-            if (!simState.hasLock) {
-                updateSimUI('❌ <b>Gagal:</b> Pasang Lock & Hasp terlebih dahulu sebelum menempelkan Tag!');
-                return;
-            }
-            if (simState.hasTag) {
-                updateSimUI('ℹ️ Tag sudah terpasang.');
-                return;
-            }
-            simState.hasTag = true;
-            updateSimUI('✅ Tagout (Label Peringatan) berhasil dipasang.');
-        }
-
-        function useMultimeter() {
-            const meterScreen = document.getElementById('sim-multimeter-screen');
-            meterScreen.style.display = 'block';
-            
-            if (simState.mcbOn) {
-                meterScreen.style.color = '#ef4444';
-                meterScreen.innerHTML = '220 V';
-                updateSimUI('⚠️ <b>Tegangan Terdeteksi!</b> Bahaya! Sistem belum diisolasi.');
-            } else {
-                meterScreen.style.color = '#22c55e';
-                meterScreen.innerHTML = '000 V';
-                simState.meterTested = true;
-                
-                if (simState.hasLock && simState.hasTag && simState.mechanicalTested) {
-                    updateSimUI('🎉 <b>Luar Biasa!</b> Pembacaan 0 Volt. Zero Energy State berhasil diverifikasi. LOTO selesai.');
-                } else if (!simState.hasLock) {
-                    updateSimUI('⚠️ Tegangan 0V, namun perangkat pengunci belum dipasang. Tidak aman untuk bekerja!');
-                } else if (!simState.mechanicalTested) {
-                    updateSimUI('⚠️ Tegangan 0V, namun Anda belum menguji kekuatan penguncian fisik (Try Out).');
-                } else {
-                    updateSimUI('✅ Tegangan 0V. Aman.');
-                }
-                updateSimUI(); // Update checkbox state
-            }
-            
-            setTimeout(() => {
-                meterScreen.style.display = 'none';
-            }, 3000);
-        }
-
-        function resetSimulator() {
-            simState = {
-                mcbOn: true,
-                hasLock: false,
-                hasTag: false,
-                mechanicalTested: false,
-                meterTested: false
-            };
-            updateSimUI('🔄 Simulator di-reset. Silakan mulai kembali dari awal.');
-            
-            [1,2,3,4,5,6].forEach(i => {
-                const cb = document.getElementById(`chk-step${i}`);
-                if (cb) cb.checked = false;
-            });
-        }
-        // --- END LOGIKA SIMULATOR ---
-
-        // Fungsi untuk menutup modal dan scroll ke field yang kosong
         function closeModal() {
             document.getElementById('alertModal').style.display = 'none';
             if (elementToFocus) {
-                elementToFocus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const y = elementToFocus.getBoundingClientRect().top + window.scrollY - 100;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+
                 if (typeof elementToFocus.focus === 'function') {
-                    // Beri jeda sedikit agar scroll selesai sebelum focus
-                    setTimeout(() => elementToFocus.focus(), 300);
+                    setTimeout(() => elementToFocus.focus(), 500);
                 }
             }
         }
 
-        // Fungsi utama validasi
         function validateAndPrint() {
             let isComplete = true;
             elementToFocus = null;
 
-            // Bersihkan error state sebelumnya
             document.querySelectorAll('.input-error').forEach(el => {
                 el.classList.remove('input-error');
             });
             document.querySelectorAll('.checkbox-label').forEach(el => {
-                el.style.color = '#334155';
+                el.classList.remove('text-error');
             });
 
-            // 1. Cek semua input teks & date & textarea yang required
             const fieldsToCheck = document.querySelectorAll('textarea[required], input[type="text"][required], input[type="date"][required]');
-            
+
             fieldsToCheck.forEach(field => {
                 if (field.value.trim() === '') {
                     isComplete = false;
@@ -1015,105 +953,23 @@
                 }
             });
 
-            // 2. Cek semua checkbox yang required
             const checkboxes = document.querySelectorAll('input[type="checkbox"][required]');
             checkboxes.forEach(cb => {
-                if(!cb.checked) {
+                if (!cb.checked) {
                     isComplete = false;
                     const parentLabel = cb.closest('label');
-                    if(parentLabel) parentLabel.style.color = '#dc2626';
+                    if (parentLabel) parentLabel.classList.add('text-error');
                     if (!elementToFocus) elementToFocus = cb;
                 }
             });
 
-            // 3. Eksekusi
             if (!isComplete) {
-                // Tampilkan Custom Modal alih-alih fungsi alert() bawaan
                 document.getElementById('alertModal').style.display = 'flex';
             } else {
-                // Sinkronkan value input dan textarea ke atribut agar terbaca oleh html2pdf
-                document.querySelectorAll('input, textarea').forEach(el => {
-                    if (el.tagName === 'TEXTAREA') {
-                        el.textContent = el.value;
-                    } else if (el.type === 'checkbox') {
-                        if (el.checked) el.setAttribute('checked', 'checked');
-                        else el.removeAttribute('checked');
-                    } else {
-                        el.setAttribute('value', el.value);
-                    }
-                });
-
-                // Ambil elemen pembungkus utama
-                const element = document.querySelector('.wrapper');
-                
-                // Ubah status tombol print saat memproses
-                const printBtn = document.querySelector('.btn-print');
-                const originalText = printBtn.innerHTML;
-                printBtn.innerHTML = 'Menyimpan PDF...';
-                printBtn.disabled = true;
-
-                // Nama file dinamis berdasarkan kelompok
-                const kelompokInput = document.querySelector('input[placeholder="Contoh: Kelompok 1"]');
-                let namaKelompok = kelompokInput && kelompokInput.value ? kelompokInput.value.replace(/[\\s\\W]+/g, '_') : 'Kelompok';
-                const filename = 'Laporan_LOTO_' + namaKelompok + '.pdf';
-
-                // Pastikan scroll berada di paling atas
-                window.scrollTo(0, 0);
-
-                // Sembunyikan elemen no-print
-                const noPrints = document.querySelectorAll('.no-print');
-                const originalDisplays = [];
-                noPrints.forEach((el, i) => {
-                    originalDisplays[i] = el.style.display;
-                    el.style.display = 'none';
-                });
-
-                // Hapus efek bayangan dan garis tepi saat diprint agar menyerupai kertas murni
-                const origWrapperBorder = element.style.border;
-                const origWrapperShadow = element.style.boxShadow;
-                
-                element.style.border = 'none';
-                element.style.boxShadow = 'none';
-
-                // Konfigurasi html2pdf
-                const opt = {
-                    margin:       10,
-                    filename:     filename,
-                    image:        { type: 'jpeg', quality: 0.98 },
-                    html2canvas:  { 
-                        scale: 2, 
-                        useCORS: true,
-                        scrollY: 0,
-                        scrollX: 0
-                    },
-                    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                    pagebreak:    { mode: ['css', 'legacy'] }
-                };
-
-                // Beri waktu sejenak sebelum membuat PDF
-                setTimeout(() => {
-                    html2pdf().set(opt).from(element).save().then(() => {
-                        // Kembalikan style
-                        noPrints.forEach((el, i) => el.style.display = originalDisplays[i]);
-                        element.style.border = origWrapperBorder;
-                        element.style.boxShadow = origWrapperShadow;
-
-                        printBtn.innerHTML = originalText;
-                        printBtn.disabled = false;
-                    }).catch(err => {
-                        console.error("Error generating PDF", err);
-                        alert("Terjadi kesalahan saat membuat PDF. Silakan coba lagi.");
-                        
-                        noPrints.forEach((el, i) => el.style.display = originalDisplays[i]);
-                        element.style.border = origWrapperBorder;
-                        element.style.boxShadow = origWrapperShadow;
-
-                        printBtn.innerHTML = originalText;
-                        printBtn.disabled = false;
-                    });
-                }, 500);
+                window.print();
             }
         }
     </script>
 </body>
+
 </html>
