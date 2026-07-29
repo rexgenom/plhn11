@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jobsheet Pertemuan 3 - Implementasi 5R</title>
+    <style>
+        /* ==========================================================
+           1. CSS VARIABLES & RESETS
+           ========================================================== */
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #eff6ff;
+            --border-color: #cbd5e1;
+            --text-dark: #1f2937;
+            --text-muted: #64748b;
+            --bg-gray: #f8fafc;
+            --accent-orange: #ea580c;
+            --danger-red: #dc2626;
+            --success-green: #10b981;
+            --white: #ffffff;
+            --focus-ring: rgba(30, 58, 138, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #334155;
+            line-height: 1.5;
+            background-color: #f1f5f9;
+            padding: 15px 10px 80px 10px;
+        }
+
+        /* ==========================================================
+           2. CONTAINER & LAYOUT
+           ========================================================== */
+        .wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-box {
+            text-align: center;
+            background-color: var(--light-blue);
+            border-left: 5px solid var(--primary-blue);
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .header-title {
+            margin: 0;
+            font-size: 18px;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .header-subtitle {
+            margin: 5px 0 0 0;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        /* ==========================================================
+           3. TYPOGRAPHY & SECTIONS
+           ========================================================== */
+        .section-container {
+            margin-bottom: 30px;
+            border-top: 2px dashed #e2e8f0;
+            padding-top: 20px;
+        }
+
+        .section-container:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .section-title {
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .section-badge {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .instruction-text {
+            margin: 0 0 15px 0;
+            font-size: 14px;
+            color: #475569;
+            background: #fffbeb;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .case-box {
+            background-color: #fff7ed;
+            border-left: 4px solid var(--accent-orange);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* ==========================================================
+           4. MOBILE FRIENDLY FORMS & CARDS
+           ========================================================== */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            color: #0f172a;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            transition: all 0.2s ease-in-out;
+            -webkit-appearance: none;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+            background-color: var(--white);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .card-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            font-size: 14px;
+            background: var(--white);
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .checkbox-label input {
+            margin-right: 12px;
+            margin-top: 2px;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            accent-color: var(--primary-blue);
+        }
+
+        .input-error {
+            border: 2px solid var(--danger-red) !important;
+            background-color: #fef2f2 !important;
+        }
+
+        .text-error {
+            color: var(--danger-red) !important;
+        }
+
+        /* ==========================================================
+           5. FIXED BOTTOM BAR (MOBILE)
+           ========================================================== */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 15px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-print {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--success-green);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* ==========================================================
+           6. MODAL ALERTS
+           ========================================================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: #fef2f2;
+            border-top: 5px solid var(--danger-red);
+            border-radius: 12px;
+            padding: 25px 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-title {
+            color: #991b1b;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal-text {
+            color: #450a0a;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            background-color: var(--danger-red);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        /* ==========================================================
+           7. SIMULASI MINI 5R
+           ========================================================== */
+        .sim-container {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .sim-header {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+            font-size: 14px;
+        }
+
+        .sim-area {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .sim-zone {
+            flex: 1;
+            background: white;
+            border: 2px dashed #94a3b8;
+            border-radius: 8px;
+            min-height: 110px;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sim-zone-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #64748b;
+            margin-bottom: 8px;
+            width: 100%;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        .sim-item {
+            background: var(--primary-blue);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            user-select: none;
+            font-weight: bold;
+        }
+
+        .sim-item.trash-item {
+            background: #64748b;
+        }
+
+        .sim-feedback {
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            min-height: 20px;
+            color: var(--danger-red);
+        }
+
+        .sim-success {
+            color: var(--success-green) !important;
+        }
+
+        .action-popup {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 300px;
+        }
+
+        .btn-sim {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            margin: 5px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .btn-sim-box {
+            background: var(--primary-blue);
+        }
+
+        .btn-sim-trash {
+            background: var(--danger-red);
+        }
+
+        .btn-sim-cancel {
+            background: #94a3b8;
+        }
+
+        @media print {
+            body {
+                background-color: var(--white);
+                padding: 0;
+            }
+
+            .wrapper {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .section-container {
+                page-break-inside: avoid;
+            }
+
+            .form-control {
+                border: 1px solid transparent;
+                border-bottom: 1px dashed #94a3b8;
+                background-color: transparent !important;
+                padding: 4px 0;
+                resize: none;
+            }
+
+            .card-item {
+                border: none;
+                padding: 0;
+                margin-bottom: 10px;
+            }
+
+            textarea {
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- MODAL ALERT KOSONG -->
+    <div id="alertModal" class="modal-overlay no-print">
+        <div class="modal-content">
+            <h3 class="modal-title">⚠️ PERINGATAN!</h3>
+            <p class="modal-text">Masih ada bagian (jawaban, identitas, atau checklist) yang belum kamu
+                isi.<br><br>Silakan lengkapi area yang ditandai warna merah muda.</p>
+            <button class="modal-btn" onclick="closeModal()">SAYA MENGERTI</button>
+        </div>
+    </div>
+
+    <div class="wrapper">
+
+        <!-- HEADER -->
+        <div class="header-box">
+            <h3 class="header-title">
+                Lembar Kerja Praktikum 3
+            </h3>
+            <p class="header-subtitle">
+                Implementasi Budaya Kerja 5R (5S)
+            </p>
+        </div>
+
+        <!-- IDENTITAS -->
+        <div class="section-container">
+            <div class="form-group">
+                <label class="form-label">Mata Pelajaran</label>
+                <input type="text" class="form-control" value="PLHN-11" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Kelas / Kelompok</label>
+                <input type="text" class="form-control" placeholder="Cth: XI TITL 1 / Kelompok 2" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Tanggal Praktik</label>
+                <input type="date" class="form-control" id="tanggalPraktik" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Daftar Anggota Kelompok</label>
+                <textarea class="form-control"
+                    placeholder="1. Nama Anggota 1&#10;2. Nama Anggota 2&#10;3. Nama Anggota 3..." required></textarea>
+            </div>
+        </div>
+
+        <!-- SIMULASI MINI (NEW) -->
+        <div class="section-container no-print">
+            <h4 class="section-title">
+                <span class="section-badge" style="background: var(--accent-orange)">🎮</span>
+                Simulasi Mini: Praktik 5R
+            </h4>
+            <p class="instruction-text">
+                Sebelum memulai tugas nyata, mari berlatih! Ketuk <em>(tap)</em> barang yang berserakan di <strong>Meja
+                    Berantakan</strong>, lalu pilih apakah barang tersebut harus disimpan ke <strong>Tool Box</strong>
+                atau dibuang ke <strong>Tempat Sampah</strong>.
+            </p>
+
+            <div class="sim-container" id="simContainer">
+                <div class="sim-header">Ketuk Barang di Bawah Ini:</div>
+
+                <div class="sim-zone" id="zone-meja"
+                    style="margin-bottom: 15px; border-color: var(--accent-orange); flex-direction: row; flex-wrap: wrap; justify-content: center;">
+                    <div class="sim-zone-title">⚠️ Meja Berantakan</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Tang Kombinasi</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Kabel Putus 10cm
+                    </div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Obeng Plus</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🔩 Baut Karatan</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">📏 Tespen</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Tang Potong</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Potongan Isolasi
+                    </div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Obeng Minus</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Kawat Bekas</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Tang Lancip</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Plastik Bungkus
+                    </div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔨 Palu Besi</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Lampu Mati</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Obeng Besar</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🔩 Paku Bengkok</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Obeng Kecil</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Pipa Pecah</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Kunci Pas 10</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Amplas Bekas</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔧 Kunci Pas 12</div>
+                    <div class="sim-item trash-item" data-type="bad" onclick="selectItem(this)">🗑️ Steker Pecah</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">📏 Multitester</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪛 Tespen Digital</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🔪 Cutter</div>
+                    <div class="sim-item" data-type="good" onclick="selectItem(this)">🪚 Gergaji Mini</div>
+                </div>
+
+                <div class="sim-area">
+                    <div class="sim-zone" id="zone-box">
+                        <div class="sim-zone-title">🧰 Tool Box</div>
+                    </div>
+                    <div class="sim-zone" id="zone-trash">
+                        <div class="sim-zone-title">🗑️ Tempat Sampah</div>
+                    </div>
+                </div>
+
+                <div class="sim-feedback" id="simFeedback"></div>
+
+                <!-- Popup Pilihan -->
+                <div class="action-popup" id="actionPopup">
+                    <p style="margin-bottom: 15px; font-size: 14px; font-weight: bold; color: var(--text-dark);"
+                        id="popupItemName"></p>
+                    <button class="btn-sim btn-sim-box" onclick="moveItem('box')">🧰 Simpan ke Tool Box</button>
+                    <button class="btn-sim btn-sim-trash" onclick="moveItem('trash')">🗑️ Buang ke Sampah</button>
+                    <button class="btn-sim btn-sim-cancel" style="margin-top: 10px;"
+                        onclick="closePopup()">Batal</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUGAS 1 -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">1</span>
+                Tugas I: Eksplorasi Awal
+            </h4>
+            <p class="instruction-text">
+                Amatilah kondisi <strong>Tool Box kelompok</strong> dan <strong>Tool Belt/peralatan pribadi</strong>
+                anggota kelompok kalian saat ini <strong>(SEBELUM penataan)</strong>. Catatlah benda/alat apa saja yang
+                berserakan, tercampur, atau salah tempat, dan estimasi waktu yang akan terbuang untuk mencarinya.
+            </p>
+
+            <div class="card-item">
+                <div class="card-title">Temuan 1</div>
+                <div class="form-group">
+                    <label class="form-label">Benda/Alat Berserakan:</label>
+                    <textarea class="form-control"
+                        placeholder="Cth: Berbagai obeng tercampur di satu kantong tas..." style="min-height: 70px;" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Estimasi Waktu Terbuang (Mencari):</label>
+                    <input type="text" class="form-control" placeholder="Cth: 2 Menit" required>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title">Temuan 2</div>
+                <div class="form-group">
+                    <label class="form-label">Benda/Alat Berserakan:</label>
+                    <textarea class="form-control" placeholder="Isi temuan observasi..." style="min-height: 70px;" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Estimasi Waktu Terbuang (Mencari):</label>
+                    <input type="text" class="form-control" placeholder="Estimasi waktu..." required>
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 15px;">
+                <label class="form-label">Kesimpulan Eksplorasi:</label>
+                <textarea class="form-control"
+                    placeholder="Uraikan bagaimana kondisi ini dapat menghambat kerja saat praktik instalasi..."
+                    required></textarea>
+            </div>
+        </div>
+
+        <!-- TUGAS 2 -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">2</span>
+                Tugas II: Eksekusi 5R
+            </h4>
+            <p class="instruction-text">
+                Laksanakan penataan alat (Tool Box & Tool Belt/Tas Alat pribadi). <strong>Centang</strong> checklist di
+                bawah ini setelah kelompok kalian benar-benar mengeksekusinya, lalu isi detailnya.
+            </p>
+
+            <!-- RINGKAS -->
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">1. RINGKAS (Menyortir)</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Menyortir paku/kabel/sampah tidak terpakai dari dalam Tool Box
+                        atau Tas Alat.
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Memisahkan alat yang rusak/berkarat dari alat yang masih
+                        berfungsi baik.
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Catatan Tindakan Kelompok:</label>
+                    <textarea class="form-control"
+                        placeholder="Sebutkan benda apa saja yang berhasil kalian singkirkan/buang..."
+                        required></textarea>
+                </div>
+            </div>
+
+            <!-- RAPI -->
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">2. RAPI (Menata Letak)</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Menata macam-macam obeng dan tang ke dalam Tool Box sesuai
+                        kompartemen/sekatnya.
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Memasukkan alat-alat pribadi secara teratur ke dalam kantong
+                        Tool Belt masing-masing siswa.
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Catatan Tindakan Kelompok:</label>
+                    <textarea class="form-control"
+                        placeholder="Jelaskan sistem penataan yang kalian buat (misal: pengelompokan jenis tang di kantong kiri)..."
+                        required></textarea>
+                </div>
+            </div>
+
+            <!-- RESIK -->
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">3. RESIK (Pembersihan)</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Mengelap Tool Box dan peralatan dari kotoran/minyak.
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" required> Membersihkan dan menyapu area lantai ruang kelas tempat
+                        kelompok praktik.
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Catatan Tindakan Kelompok:</label>
+                    <textarea class="form-control"
+                        placeholder="Sebutkan alat kebersihan yang digunakan dan area mana yang dibersihkan..."
+                        required></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUGAS 3 -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">3</span>
+                Tugas III: Jadwal Piket 5R
+            </h4>
+            <p class="instruction-text">
+                Untuk mempertahankan kondisi peralatan yang sudah <strong>Ringkas, Rapi, dan Resik</strong>, susunlah
+                jadwal penanggung jawab perawatan 5R (Tool Box & Kebersihan) kelompok kalian. Kalian dapat mengisi
+                <strong>lebih dari 1 nama siswa</strong> per harinya.
+            </p>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Senin</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="1. Nama Siswa A&#10;2. Nama Siswa B..."
+                        style="min-height: 70px;" required></textarea>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Selasa</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="1. Nama Siswa C&#10;2. Nama Siswa D..."
+                        style="min-height: 70px;" required></textarea>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Rabu</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="Tulis nama petugas piket..." style="min-height: 70px;"
+                        required></textarea>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Kamis</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="Tulis nama petugas piket..." style="min-height: 70px;"
+                        required></textarea>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-title" style="color: var(--primary-blue);">📅 Jumat</div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <textarea class="form-control" placeholder="Tulis nama petugas piket..." style="min-height: 70px;"
+                        required></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUGAS 4: STUDI KASUS -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">4</span>
+                Tugas IV: Analisis Studi Kasus
+            </h4>
+            <p class="instruction-text">
+                Bacalah masalah di bawah ini, lalu berikan solusi perbaikan berdasarkan prinsip 5R yang telah kalian
+                pelajari.
+            </p>
+
+            <div class="case-box" style="border-left-color: var(--danger-red); background-color: #fef2f2;">
+                <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: #991b1b;">
+                    📖 Kasus Praktik Kelistrikan:
+                </p>
+                <p style="font-size: 14px; color: #450a0a; margin-bottom: 0; text-align: justify;">
+                    Saat sedang praktik instalasi, Budi kesulitan mencari obeng plus dan tang potong karena tercampur
+                    dengan potongan kabel tajam, baut karatan, dan sampah isolasi di dasar tas alatnya (Tool Belt).
+                    Akibatnya, Budi menghabiskan waktu 10 menit hanya untuk mengaduk-aduk tasnya. Bahkan, jari Budi
+                    sempat terluka tergores ujung kabel tajam yang seharusnya sudah dibuang. Pekerjaan kelompok mereka
+                    pun menjadi kacau dan terlambat.
+                </p>
+            </div>
+
+            <div class="card-item">
+                <div class="form-group">
+                    <label class="form-label">Menurut kelompokmu, prinsip 5R apa saja yang dilanggar oleh Budi?</label>
+                    <input type="text" class="form-control" placeholder="Cth: Ringkas (karena...) dan Rapi (karena...)"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Solusi Perbaikan: Langkah apa yang harus dilakukan Budi besok?</label>
+                    <textarea class="form-control"
+                        placeholder="Uraikan solusi perbaikan penataan alat di dalam tas untuk Budi..."
+                        required></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUGAS 5 -->
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">5</span>
+                Tugas V: Kunjungan & Refleksi
+            </h4>
+            <p class="instruction-text">
+                Lakukan kunjungan (tour) ke area meja/kelompok lain di kelas. Apresiasi hasil kerja penataan mereka,
+                lalu jawab pertanyaan berikut.
+            </p>
+
+            <div class="case-box">
+                <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: var(--text-dark);">
+                    1. Dari kelompok lain yang kalian kunjungi, inovasi penataan alat (di Tool Box / Tool Belt) apa yang
+                    paling menarik dan rapi?
+                </p>
+                <textarea class="form-control"
+                    placeholder="Tuliskan nama kelompok yang dikunjungi dan apresiasi kalian..." required></textarea>
+            </div>
+
+            <div class="case-box">
+                <p style="margin: 0 0 10px 0; font-size: 14px; font-weight: bold; color: var(--text-dark);">
+                    2. Evaluasi Diri: Bagaimana perasaan kalian saat bekerja dengan peralatan yang sudah tertata rapi
+                    berstandar 5R, dibandingkan saat masih berantakan?
+                </p>
+                <textarea class="form-control"
+                    placeholder="Tuliskan refleksi jujur mengenai rasa nyaman dan efisiensi waktu mencari alat..."
+                    required></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM BAR UNTUK MOBILE -->
+    <div class="bottom-bar no-print">
+        <button type="button" class="btn-print" onclick="validateAndPrint()">
+            Simpan PDF / Cetak Laporan
+        </button>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. LOGIKA SIMULASI MINI 5R
+        // ==========================================
+        let selectedElement = null;
+        let itemsLeft = 25;
+
+        function selectItem(el) {
+            selectedElement = el;
+            document.getElementById('popupItemName').innerText = "Pindahkan " + el.innerText + " ke mana?";
+            document.getElementById('actionPopup').style.display = 'block';
+            document.getElementById('simFeedback').innerText = '';
+        }
+
+        function closePopup() {
+            document.getElementById('actionPopup').style.display = 'none';
+            selectedElement = null;
+        }
+
+        function moveItem(destination) {
+            if (!selectedElement) return;
+
+            const type = selectedElement.getAttribute('data-type');
+            const feedbackEl = document.getElementById('simFeedback');
+
+            if (destination === 'box') {
+                if (type === 'good') {
+                    document.getElementById('zone-box').appendChild(selectedElement);
+                    selectedElement.onclick = null; // matikan klik
+                    selectedElement.style.cursor = 'default';
+                    feedbackEl.innerText = "Benar! Alat disimpan dengan Rapi.";
+                    feedbackEl.className = "sim-feedback sim-success";
+                    itemsLeft--;
+                } else {
+                    feedbackEl.innerText = "Salah! Barang rusak/sampah harus dibuang (Ringkas).";
+                    feedbackEl.className = "sim-feedback";
+                }
+            } else if (destination === 'trash') {
+                if (type === 'bad') {
+                    document.getElementById('zone-trash').appendChild(selectedElement);
+                    selectedElement.onclick = null;
+                    selectedElement.style.cursor = 'default';
+                    feedbackEl.innerText = "Benar! Barang tak terpakai dibuang (Ringkas).";
+                    feedbackEl.className = "sim-feedback sim-success";
+                    itemsLeft--;
+                } else {
+                    feedbackEl.innerText = "Salah! Alat masih bagus jangan dibuang.";
+                    feedbackEl.className = "sim-feedback";
+                }
+            }
+
+            closePopup();
+
+            if (itemsLeft === 0) {
+                feedbackEl.innerText = "🎉 Luar Biasa! Simulasi Selesai, area kerjamu sudah Rapi!";
+                feedbackEl.className = "sim-feedback sim-success";
+                document.getElementById('zone-meja').style.display = 'none';
+            }
+        }
+
+        // ==========================================
+        // 2. LOGIKA FORM DAN VALIDASI
+        // ==========================================
+        let elementToFocus = null;
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(el => {
+                el.addEventListener('input', function () {
+                    this.style.height = 'auto';
+                    this.style.height = (this.scrollHeight) + 'px';
+                    this.classList.remove('input-error');
+                });
+            });
+
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(el => {
+                el.addEventListener('input', function () {
+                    this.classList.remove('input-error');
+                    if (this.type === 'checkbox') {
+                        const parentLabel = this.closest('label');
+                        if (parentLabel) parentLabel.classList.remove('text-error');
+                    }
+                });
+            });
+        });
+
+        function closeModal() {
+            document.getElementById('alertModal').style.display = 'none';
+            if (elementToFocus) {
+                const y = elementToFocus.getBoundingClientRect().top + window.scrollY - 100;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+
+                if (typeof elementToFocus.focus === 'function') {
+                    setTimeout(() => elementToFocus.focus(), 500);
+                }
+            }
+        }
+
+        function validateAndPrint() {
+            let isComplete = true;
+            elementToFocus = null;
+
+            document.querySelectorAll('.input-error').forEach(el => {
+                el.classList.remove('input-error');
+            });
+            document.querySelectorAll('.checkbox-label').forEach(el => {
+                el.classList.remove('text-error');
+            });
+
+            const fieldsToCheck = document.querySelectorAll('textarea[required], input[type="text"][required], input[type="date"][required]');
+
+            fieldsToCheck.forEach(field => {
+                if (field.value.trim() === '') {
+                    isComplete = false;
+                    field.classList.add('input-error');
+                    if (!elementToFocus) elementToFocus = field;
+                }
+            });
+
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][required]');
+            checkboxes.forEach(cb => {
+                if (!cb.checked) {
+                    isComplete = false;
+                    const parentLabel = cb.closest('label');
+                    if (parentLabel) parentLabel.classList.add('text-error');
+                    if (!elementToFocus) elementToFocus = cb;
+                }
+            });
+
+            if (!isComplete) {
+                document.getElementById('alertModal').style.display = 'flex';
+            } else {
+                window.print();
+            }
+        }
+    </script>
+</body>
+
+</html>
