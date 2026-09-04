@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobsheet Modul 2: Pertemuan 3 - Nameplate Listrik</title>
+    <style>
+        /* ==========================================================
+           1. CSS VARIABLES & RESETS
+           ========================================================== */
+        :root {
+            --primary-color: #1e3a8a;
+            --light-blue: #eff6ff;
+            --border-color: #cbd5e1;
+            --text-dark: #1f2937;
+            --text-muted: #64748b;
+            --bg-gray: #f8fafc;
+            --accent-blue: #2563eb;
+            --danger-red: #ef4444;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --white: #ffffff;
+            --focus-ring: rgba(37, 99, 235, 0.3);
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: #334155;
+            line-height: 1.6;
+            background-color: #f1f5f9;
+            padding: 30px 15px;
+        }
+
+        /* ==========================================================
+           2. CONTAINER & LAYOUT
+           ========================================================== */
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-box {
+            text-align: center;
+            background-color: var(--light-blue);
+            border-left: 6px solid var(--primary-color);
+            padding: 25px;
+            margin-bottom: 35px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .header-title {
+            margin: 0;
+            font-size: 24px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .header-subtitle {
+            margin: 10px 0 0 0;
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* ==========================================================
+           3. TYPOGRAPHY & SECTIONS
+           ========================================================== */
+        .section-container {
+            margin-bottom: 45px;
+        }
+
+        .section-title {
+            margin: 0 0 20px 0;
+            font-size: 20px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .section-badge {
+            background-color: var(--primary-color);
+            color: var(--white);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .instruction-text {
+            margin: 0 0 20px 0;
+            text-align: justify;
+            font-size: 16px;
+            background-color: #f8fafc;
+            padding: 15px;
+            border-left: 4px solid var(--text-muted);
+        }
+
+        /* ==========================================================
+           4. TABLE STYLES
+           ========================================================== */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            margin-bottom: 25px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            min-width: 850px;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 16px;
+            border: 1px solid var(--primary-color);
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            vertical-align: top;
+        }
+
+        .td-bg-light {
+            background-color: var(--bg-gray);
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .td-center {
+            text-align: center;
+        }
+
+        /* ==========================================================
+           5. INTERACTIVE FORM ELEMENTS
+           ========================================================== */
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            font-family: inherit;
+            color: #0f172a;
+            background-color: var(--white);
+            border: 1px solid #94a3b8;
+            border-radius: 6px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px var(--focus-ring);
+            background-color: #f8fafc;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .input-error {
+            border: 2px solid var(--danger-red) !important;
+            background-color: #fef2f2 !important;
+        }
+
+        /* ==========================================================
+           6. CUSTOM MODAL ALERT
+           ========================================================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.7);
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-top: 6px solid var(--danger-red);
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-title {
+            color: var(--danger-red);
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .modal-text {
+            color: var(--text-dark);
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .modal-btn {
+            background-color: var(--danger-red);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .modal-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        /* ==========================================================
+           7. PRINT BUTTON & MEDIA QUERY
+           ========================================================== */
+        .print-toolbar {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-print {
+            background-color: var(--success-green);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+            transition: transform 0.1s;
+        }
+
+        .btn-print:active {
+            transform: scale(0.98);
+        }
+
+        .toolbar-text {
+            color: var(--text-dark);
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        @media print {
+            body {
+                background-color: var(--white);
+                padding: 0;
+                margin: 0;
+            }
+
+            .wrapper {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .table-responsive {
+                overflow-x: visible;
+                margin-bottom: 20px;
+                border: none;
+            }
+
+            table {
+                min-width: 100%;
+            }
+
+            .form-control {
+                border: 1px solid transparent;
+                border-bottom: 1px dashed #94a3b8;
+                background-color: transparent !important;
+                padding: 4px 0;
+                resize: none;
+            }
+
+            textarea {
+                overflow: hidden;
+            }
+
+            .section-container {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+    <!-- Library html2pdf.js untuk mengunduh PDF secara langsung -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <div id="alertModal" class="modal-overlay no-print">
+        <div class="modal-content">
+            <h3 class="modal-title">⚠️ IDENTIFIKASI GAGAL</h3>
+            <p class="modal-text">Sebagai teknisi profesional, kita pantang berasumsi dan wajib teliti.<br><br>Masih ada
+                kolom pengamatan nameplate atau analisis yang belum Anda lengkapi. Silakan periksa area yang ditandai
+                merah muda.</p>
+            <button class="modal-btn" onclick="closeModal()">PERBAIKI DATA</button>
+        </div>
+    </div>
+
+    <div class="print-toolbar no-print">
+        <span class="toolbar-text">
+            📝 Pastikan seluruh data dari komponen nyata di bengkel telah dicatat.
+        </span>
+        <button type="button" class="btn-print" onclick="validateAndPrint()">
+            Cetak Laporan Praktikum (PDF)
+        </button>
+    </div>
+
+    <div class="wrapper">
+
+        <div class="header-box">
+            <h3 class="header-title">
+                Lembar Kerja Peserta Didik (LKPD) - Pertemuan 3
+            </h3>
+            <p class="header-subtitle">
+                Praktik Pembacaan Nameplate Peralatan Listrik & IP Rating | Kode: JS-TITL-MR-03
+            </p>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="td-bg-light" style="width: 20%;">Mata Pelajaran</td>
+                        <td style="width: 30%;">Maintenance & Repair Gedung</td>
+                        <td class="td-bg-light" style="width: 20%;">Kelompok / Meja</td>
+                        <td style="width: 30%;">
+                            <input type="text" class="form-control" placeholder="Contoh: Kelompok 1 / Meja A" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-bg-light">Instruktur / Guru</td>
+                        <td>Muhamad Rendi Muhindo, S.Pd.</td>
+                        <td class="td-bg-light">Kelas / Semester</td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Contoh: XI TITL" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-bg-light">Asal Sekolah</td>
+                        <td>SMK Negeri Karangpucung</td>
+                        <td class="td-bg-light">Tanggal Praktik</td>
+                        <td>
+                            <input type="date" class="form-control" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-bg-light" style="vertical-align: top;">Nama Anggota Kelompok</td>
+                        <td colspan="3">
+                            <textarea class="form-control"
+                                placeholder="Tuliskan nama lengkap seluruh anggota kelompok Anda di sini..."
+                                style="min-height: 85px;" required></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">1</span>
+                Tugas Observasi Fisik 1: Motor Listrik AC 1 Fasa
+            </h4>
+            <p class="instruction-text">
+                Lihat nameplate unit motor listrik 1 fasa yang ada di bawah ini. Baca dengan teliti dan pindahkan
+                informasi ukur tersebut ke dalam tabel berikut tanpa melakukan pembulatan.
+            </p>
+
+            <div style="text-align: center; margin: 25px 0;">
+                <svg viewBox="0 0 600 350" width="100%"
+                    style="max-width: 600px; display: inline-block; filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1));"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <!-- Base Plate -->
+                    <rect x="5" y="5" width="590" height="340" rx="15" fill="#f8fafc" stroke="#334155"
+                        stroke-width="3" />
+                    <rect x="10" y="10" width="580" height="330" rx="10" fill="#ffffff" stroke="#94a3b8"
+                        stroke-width="1" />
+
+                    <!-- Logo -->
+                    <g transform="translate(45, 30)">
+                        <polygon points="25,0 45,0 55,10 55,30 45,40 25,40 15,30 15,10" fill="none" stroke="#ef4444"
+                            stroke-width="3.5" />
+                        <polygon points="30,5 40,5 50,15 50,25 40,35 30,35 20,25 20,15" fill="none" stroke="#ef4444"
+                            stroke-width="2" />
+                        <text x="35" y="24" font-family="Arial, sans-serif" font-size="12" font-weight="900"
+                            fill="#ef4444" text-anchor="middle">J.Y</text>
+                    </g>
+
+                    <!-- Header Text -->
+                    <text x="160" y="65" font-family="Arial, sans-serif" font-size="42" font-weight="900" fill="#1e293b"
+                        letter-spacing="2">TAIWAN</text>
+
+                    <g transform="translate(355, 22)">
+                        <text x="55" y="12" font-family="Arial, sans-serif" font-size="12" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">SINGLE</text>
+                        <line x1="0" y1="18" x2="110" y2="18" stroke="#1e293b" stroke-width="1.5" />
+                        <text x="55" y="32" font-family="Arial, sans-serif" font-size="12" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">INDUCTION</text>
+                        <line x1="0" y1="38" x2="110" y2="38" stroke="#1e293b" stroke-width="1.5" />
+                        <text x="55" y="52" font-family="Arial, sans-serif" font-size="12" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">PHASE</text>
+                    </g>
+
+                    <text x="485" y="65" font-family="Arial, sans-serif" font-size="36" font-weight="bold"
+                        fill="#1e293b" text-anchor="start">MOTOR</text>
+
+                    <!-- Table Borders -->
+                    <g stroke="#1e293b" stroke-width="1.5">
+                        <!-- Horizontal Lines -->
+                        <line x1="25" y1="90" x2="575" y2="90" />
+                        <line x1="25" y1="125" x2="575" y2="125" />
+                        <line x1="25" y1="160" x2="575" y2="160" />
+                        <line x1="25" y1="195" x2="575" y2="195" />
+                        <line x1="25" y1="230" x2="225" y2="230" />
+                        <line x1="25" y1="265" x2="225" y2="265" />
+
+                        <!-- Vertical lines -->
+                        <line x1="25" y1="90" x2="25" y2="300" />
+                        <line x1="120" y1="90" x2="120" y2="300" />
+                        <line x1="225" y1="90" x2="225" y2="300" />
+                        <line x1="330" y1="90" x2="330" y2="195" />
+                        <line x1="425" y1="90" x2="425" y2="300" />
+                        <line x1="500" y1="90" x2="500" y2="195" />
+                        <line x1="575" y1="90" x2="575" y2="300" />
+                    </g>
+
+                    <!-- Table Text -->
+                    <g font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1e293b">
+                        <!-- Row 1 -->
+                        <text x="72" y="113" text-anchor="middle">TYPE</text>
+                        <text x="172" y="113" text-anchor="middle">BDCW</text>
+                        <text x="277" y="113" text-anchor="middle">OUTPUT</text>
+                        <text x="377" y="113" text-anchor="middle">1 1/2HP</text>
+                        <text x="462" y="113" text-anchor="middle">KW</text>
+                        <text x="537" y="113" text-anchor="middle">1.1</text>
+
+                        <!-- Row 2 -->
+                        <text x="72" y="148" text-anchor="middle">VOLTS</text>
+                        <text x="172" y="148" text-anchor="middle">220</text>
+                        <text x="277" y="148" text-anchor="middle">HZ</text>
+                        <text x="377" y="148" text-anchor="middle">50</text>
+                        <text x="462" y="148" text-anchor="middle">POLE</text>
+                        <text x="537" y="148" text-anchor="middle">4</text>
+
+                        <!-- Row 3 -->
+                        <text x="72" y="183" text-anchor="middle">AMP</text>
+                        <text x="172" y="183" text-anchor="middle">9.82</text>
+                        <text x="277" y="183" text-anchor="middle">HEAT</text>
+                        <text x="377" y="183" text-anchor="middle">65°C</text>
+                        <text x="462" y="183" text-anchor="middle">CLASS</text>
+                        <text x="537" y="183" text-anchor="middle">F</text>
+
+                        <!-- Row 4 -->
+                        <text x="72" y="218" text-anchor="middle">RPM</text>
+                        <text x="172" y="218" text-anchor="middle">1410</text>
+
+                        <!-- Row 5 & 6 -->
+                        <text x="72" y="253" text-anchor="middle">DATE</text>
+                        <text x="72" y="288" text-anchor="middle">SER.NO</text>
+                        <text x="172" y="288" text-anchor="middle" fill="#64748b" letter-spacing="1">0422604811</text>
+                    </g>
+
+                    <!-- CW Section -->
+                    <g transform="translate(325, 210)">
+                        <text x="0" y="15" font-family="Arial, sans-serif" font-size="15" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">C W</text>
+                        <text x="-25" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">1</text>
+                        <text x="0" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">6</text>
+                        <text x="25" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">2</text>
+
+                        <path d="M -25,42 L -25,55 L 0,55 L 0,42" fill="none" stroke="#ef4444" stroke-width="2" />
+                        <line x1="-12.5" y1="55" x2="-12.5" y2="68" stroke="#ef4444" stroke-width="2" />
+                        <polygon points="-16.5,63 -8.5,63 -12.5,70" fill="#ef4444" />
+
+                        <line x1="25" y1="42" x2="25" y2="68" stroke="#ef4444" stroke-width="2" />
+                        <polygon points="21,63 29,63 25,70" fill="#ef4444" />
+                    </g>
+
+                    <!-- CCW Section -->
+                    <g transform="translate(500, 210)">
+                        <text x="0" y="15" font-family="Arial, sans-serif" font-size="15" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">CCW</text>
+                        <text x="-25" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">1</text>
+                        <text x="0" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">6</text>
+                        <text x="25" y="35" font-family="Arial, sans-serif" font-size="14" font-weight="bold"
+                            fill="#1e293b" text-anchor="middle">2</text>
+
+                        <line x1="-25" y1="42" x2="-25" y2="68" stroke="#ef4444" stroke-width="2" />
+                        <polygon points="-29,63 -21,63 -25,70" fill="#ef4444" />
+
+                        <path d="M 0,42 L 0,55 L 25,55 L 25,42" fill="none" stroke="#ef4444" stroke-width="2" />
+                        <line x1="12.5" y1="55" x2="12.5" y2="68" stroke="#ef4444" stroke-width="2" />
+                        <polygon points="8.5,63 16.5,63 12.5,70" fill="#ef4444" />
+                    </g>
+
+                    <!-- Footer Text -->
+                    <path d="M 10,300 L 590,300 L 590,330 Q 590,340 580,340 L 20,340 Q 10,340 10,330 Z"
+                        fill="#0f172a" />
+                    <text x="300" y="325" font-family="'Arial Narrow', Arial, sans-serif" font-size="20"
+                        font-weight="bold" fill="#f8fafc" text-anchor="middle" letter-spacing="1">JIAYU ELECTRICAL
+                        MACHINERY CO.,LTD</text>
+                </svg>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">No</th>
+                            <th style="width: 35%;">Parameter Teknis</th>
+                            <th style="width: 30%;">Hasil Pembacaan Nameplate</th>
+                            <th style="width: 30%;">Satuan (Unit)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td-center">1</td>
+                            <td class="td-bg-light">Tegangan Nominal (V)</td>
+                            <td><input type="text" class="form-control" placeholder="Cth: 220" required></td>
+                            <td><input type="text" class="form-control" value="Volt (AC)" readonly
+                                    style="background-color: #f1f5f9;"></td>
+                        </tr>
+                        <tr>
+                            <td class="td-center">2</td>
+                            <td class="td-bg-light">Frekuensi Jaringan (Hz)</td>
+                            <td><input type="text" class="form-control" placeholder="Cth: 50" required></td>
+                            <td><input type="text" class="form-control" value="Hertz" readonly
+                                    style="background-color: #f1f5f9;"></td>
+                        </tr>
+                        <tr>
+                            <td class="td-center">3</td>
+                            <td class="td-bg-light">Kecepatan Putaran (RPM)</td>
+                            <td><input type="text" class="form-control" placeholder="Cth: 1450" required></td>
+                            <td><input type="text" class="form-control" value="Rotations Per Minute" readonly
+                                    style="background-color: #f1f5f9;"></td>
+                        </tr>
+                        <tr>
+                            <td class="td-center">4</td>
+                            <td class="td-bg-light">Arus Beban Penuh (FLA)</td>
+                            <td><input type="text" class="form-control" placeholder="Cth: 3.5" required></td>
+                            <td><input type="text" class="form-control" value="Ampere (A)" readonly
+                                    style="background-color: #f1f5f9;"></td>
+                        </tr>
+                        <tr>
+                            <td class="td-center">5</td>
+                            <td class="td-bg-light">Faktor Daya (Cos φ)</td>
+                            <td><input type="text" class="form-control" placeholder="Cth: 0.85" required></td>
+                            <td><input type="text" class="form-control" value="-" readonly
+                                    style="background-color: #f1f5f9;"></td>
+                        </tr>
+                        <tr>
+                            <td class="td-center">6</td>
+                            <td class="td-bg-light">Tingkat Perlindungan (IP)</td>
+                            <td><input type="text" class="form-control" placeholder="Cth: IP54" required></td>
+                            <td><input type="text" class="form-control" value="Ingress Protection Code" readonly
+                                    style="background-color: #f1f5f9;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 15px;">
+                <label
+                    style="font-weight: 700; display: block; margin-bottom: 10px; color: var(--primary-color);">Kesimpulan
+                    Analisis Motor:</label>
+                <textarea class="form-control"
+                    placeholder="Berdasarkan hasil pembacaan tegangan dan IP di atas, jelaskan apakah motor ini cocok dipakai langsung tanpa trafo di Indonesia dan apakah aman diletakkan di luar ruangan (outdoor) saat hujan deras..."
+                    required></textarea>
+            </div>
+        </div>
+
+        <div class="section-container" style="page-break-before: always; padding-top: 20px;">
+            <h4 class="section-title">
+                <span class="section-badge">2</span>
+                Tugas Observasi Fisik 2: Komponen Pengaman (MCB)
+            </h4>
+            <p class="instruction-text">
+                Amati komponen MCB (Miniature Circuit Breaker) yang diberikan instruktur. Perhatikan kode cetakan yang
+                biasanya berada di bagian depan atau samping casing MCB.
+            </p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Merk / Brand</th>
+                            <th style="width: 25%;">Tipe Kurva (Cth: C32)</th>
+                            <th style="width: 25%;">Kapasitas Pemutusan (kA)</th>
+                            <th style="width: 25%;">Tegangan Operasi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" class="form-control" placeholder="Cth: Schneider" required></td>
+                            <td><input type="text" class="form-control" placeholder="Cth: C10, C16, dll." required></td>
+                            <td><input type="text" class="form-control" placeholder="Cth: 4500A / 6kA" required></td>
+                            <td><input type="text" class="form-control" placeholder="Cth: 230/400V" required></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div
+                style="background-color: #f8fafc; border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; margin-top: -10px;">
+                <p style="margin-top: 0; margin-bottom: 15px; font-weight: 600; color: var(--text-dark);">
+                    Uraikan arti dari "Tipe Kurva" dan "Angka Kapasitas Pemutusan" yang Anda temukan pada MCB tersebut:
+                </p>
+                <textarea class="form-control" style="min-height: 100px;"
+                    placeholder="Uraikan jawaban Anda di sini berdasarkan materi yang telah dipelajari atau referensi buku teknis..."
+                    required></textarea>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">3</span>
+                Studi Kasus Eksekusi (Problem Based Learning)
+            </h4>
+            <p class="instruction-text">
+                Guru (Klien) memberikan Anda permasalahan desain instalasi bangunan baru. Berdasarkan pemahaman Anda
+                mengenai kode <strong>IP (Ingress Protection)</strong>, analisislah pemilihan spesifikasi komponen yang
+                tepat untuk skenario berikut.
+            </p>
+
+            <div
+                style="border-left: 5px solid var(--warning-orange); background-color: #fffbeb; padding: 25px; border-radius: 0 8px 8px 0; margin-bottom: 25px;">
+                <p
+                    style="margin: 0 0 15px 0; font-size: 16px; font-weight: 700; color: #b45309; text-transform: uppercase;">
+                    Kasus Gedung A: Pemasangan Pompa Air Mancur Outdoor
+                </p>
+                <p style="margin: 0 0 15px 0; font-size: 15px; color: #78350f; text-align: justify;">
+                    Sebuah sekolah butuh pemasangan instalasi daya untuk pompa air mancur yang terletak di tengah taman
+                    terbuka tanpa kanopi. Pompa tersebut memiliki risiko tinggi tersiram hujan badai dan cipratan
+                    genangan air berlumpur secara terus-menerus. Di gudang terdapat 3 jenis kotak sambung (T-doos)
+                    dengan spesifikasi: <strong>IP20</strong>, <strong>IP44</strong>, dan <strong>IP66</strong>.
+                </p>
+
+                <label style="font-weight: 700; display: block; margin-bottom: 10px; color: var(--text-dark);">
+                    Pertanyaan 3A: Kotak sambung mana yang Anda pilih dan jelaskan alasan teknis perlindungannya
+                    berdasar tabel digit IP!
+                </label>
+                <textarea class="form-control" style="min-height: 120px;"
+                    placeholder="Tuliskan komponen terpilih dan dekonstruksi digit pertama (debu) serta digit kedua (air)..."
+                    required></textarea>
+            </div>
+
+            <div
+                style="border-left: 5px solid var(--accent-blue); background-color: #eff6ff; padding: 25px; border-radius: 0 8px 8px 0;">
+                <label style="font-weight: 700; display: block; margin-bottom: 10px; color: var(--text-dark);">
+                    Pertanyaan 3B: Apa risiko terburuk jika Anda secara asal/berasumsi memasang T-Doos dengan rating
+                    IP20 pada taman tersebut?
+                </label>
+                <textarea class="form-control" style="min-height: 100px;"
+                    placeholder="Uraikan potensi bahaya bagi sistem instalasi dan bagi manusia di sekitarnya..."
+                    required></textarea>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <h4 class="section-title">
+                <span class="section-badge">4</span>
+                Lembar Refleksi Diri (Joyful Learning)
+            </h4>
+            <p class="instruction-text">
+                Mari sejenak mengevaluasi pemahaman kalian setelah membedah langsung spesifikasi peralatan fisik di
+                bengkel. Jawab pertanyaan pemantik penutup ini dengan jujur.
+            </p>
+
+            <div style="margin-bottom: 25px;">
+                <p style="margin: 0 0 10px 0; font-size: 15px; font-weight: 700; color: var(--text-dark);">
+                    1. Mengapa seorang teknisi listrik profesional pantang melakukan pekerjaan instalasi atau
+                    penggantian komponen hanya berdasarkan "asumsi" bentuk fisik atau ingatan belaka, tanpa melihat
+                    nameplate terlebih dahulu?
+                </p>
+                <textarea class="form-control" style="min-height: 120px;"
+                    placeholder="Tuliskan pendapat reflektif Anda..." required></textarea>
+            </div>
+
+            <div>
+                <p style="margin: 0 0 10px 0; font-size: 15px; font-weight: 700; color: var(--text-dark);">
+                    2. Dari seluruh komponen fisik (MCB, MCCB, Motor, Fitting) yang Anda teliti hari ini,
+                    huruf/singkatan di nameplate mana yang awalnya paling membingungkan Anda sebelum memahami materi?
+                </p>
+                <textarea class="form-control" style="min-height: 90px;"
+                    placeholder="Sebutkan singkatan tersebut dan jelaskan apa yang akhirnya membuat Anda paham..."
+                    required></textarea>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Variabel penampung elemen yang belum diisi
+        let elementToFocus = null;
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Auto-resize textarea agar rapi saat diprint
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(el => {
+                el.addEventListener('input', function () {
+                    this.style.height = 'auto';
+                    this.style.height = (this.scrollHeight) + 'px';
+                    // Hilangkan indikator error saat siswa mulai mengetik
+                    this.classList.remove('input-error');
+                });
+            });
+
+            // Hilangkan indikator error dari input standar
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(el => {
+                el.addEventListener('input', function () {
+                    this.classList.remove('input-error');
+                });
+            });
+
+            // ==========================================
+            // FITUR AUTOSAVE (LOCAL STORAGE)
+            // ==========================================
+            const allFormFields = document.querySelectorAll('input, textarea');
+            allFormFields.forEach((field, index) => {
+                // Beri ID unik berdasarkan urutan elemen (karena belum ada atribut ID/Name)
+                if (!field.id) {
+                    field.id = 'lkpd_field_' + index;
+                }
+
+                // 1. Load data yang sudah tersimpan saat halaman dimuat
+                const savedValue = localStorage.getItem(field.id);
+                if (savedValue !== null) {
+                    field.value = savedValue;
+
+                    // Trigger penyesuaian tinggi textarea jika ada isinya
+                    if (field.tagName.toLowerCase() === 'textarea') {
+                        setTimeout(() => {
+                            field.style.height = 'auto';
+                            field.style.height = (field.scrollHeight) + 'px';
+                        }, 10);
+                    }
+                }
+
+                // 2. Simpan data setiap kali siswa mengetik sesuatu
+                field.addEventListener('input', function () {
+                    localStorage.setItem(this.id, this.value);
+                });
+            });
+        });
+
+        // Fungsi Menutup Modal dan Fokus ke Elemen yang salah
+        function closeModal() {
+            document.getElementById('alertModal').style.display = 'none';
+            if (elementToFocus) {
+                // Scroll perlahan ke bagian yang kosong
+                elementToFocus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Beri waktu animasi scroll sebelum trigger focus outline
+                setTimeout(() => {
+                    if (typeof elementToFocus.focus === 'function') {
+                        elementToFocus.focus();
+                    }
+                }, 400);
+            }
+        }
+
+        // Fungsi Validasi Ketat sebelum Cetak Laporan
+        function validateAndPrint() {
+            let isComplete = true;
+            elementToFocus = null;
+
+            // Bersihkan semua state error sebelumnya
+            document.querySelectorAll('.input-error').forEach(el => {
+                el.classList.remove('input-error');
+            });
+
+            // Seleksi seluruh elemen input dan textarea yang memiliki atribut required
+            const fieldsToCheck = document.querySelectorAll('textarea[required], input[type="text"][required], input[type="date"][required]');
+
+            // Lakukan pengecekan isi kosong
+            fieldsToCheck.forEach(field => {
+                if (field.value.trim() === '') {
+                    isComplete = false;
+                    field.classList.add('input-error');
+                    // Simpan elemen pertama yang kosong untuk auto-focus nanti
+                    if (!elementToFocus) elementToFocus = field;
+                }
+            });
+
+            // Eksekusi print jika valid, atau tampilkan peringatan modal jika gagal
+            if (!isComplete) {
+                document.getElementById('alertModal').style.display = 'flex';
+            } else {
+                // Mulai proses download PDF menggunakan html2pdf
+                const btn = document.querySelector('.btn-print');
+                const originalText = btn.innerText;
+                btn.innerText = 'Memproses PDF... ⏳';
+                btn.disabled = true;
+
+                // Ambil elemen konten utama (mengabaikan tombol print)
+                const element = document.querySelector('.wrapper');
+
+                // Siapkan opsi html2pdf
+                const opt = {
+                    margin: 10,
+                    filename: 'LKPD_Observasi_Nameplate.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                // Sembunyikan gaya input box menjadi garis bawah putus-putus seperti kertas lembar kerja cetak
+                const inputs = element.querySelectorAll('.form-control');
+                const oldStyles = [];
+
+                inputs.forEach((input, index) => {
+                    oldStyles[index] = {
+                        border: input.style.border,
+                        borderBottom: input.style.borderBottom,
+                        backgroundColor: input.style.backgroundColor
+                    };
+                    input.style.border = '1px solid transparent';
+                    input.style.borderBottom = '1px dashed #94a3b8';
+                    input.style.backgroundColor = 'transparent';
+                });
+
+                // Eksekusi pembuatan PDF dan trigger download
+                html2pdf().set(opt).from(element).save().then(() => {
+                    // Kembalikan style seperti semula setelah PDF selesai di-download
+                    inputs.forEach((input, index) => {
+                        input.style.border = oldStyles[index].border;
+                        input.style.borderBottom = oldStyles[index].borderBottom;
+                        input.style.backgroundColor = oldStyles[index].backgroundColor;
+                    });
+
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }).catch(err => {
+                    console.error("Error generating PDF:", err);
+                    alert("Gagal membuat PDF. Coba kembali beberapa saat lagi.");
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
